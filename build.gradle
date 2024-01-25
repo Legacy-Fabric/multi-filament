@@ -54,13 +54,15 @@ gradlePlugin {
 
 publishing {
 	repositories {
-		if (ENV.MAVEN_URL) {
-			repositories.maven {
-				name "fabric"
-				url ENV.MAVEN_URL
+		if (ENV.MAVEN_PUBLISH_CREDENTIALS) {
+			maven {
+				url "https://repo.legacyfabric.net/repository/legacyfabric"
 				credentials {
-					username ENV.MAVEN_USERNAME
-					password ENV.MAVEN_PASSWORD
+					username ENV.MAVEN_PUBLISH_CREDENTIALS.split(":")[0]
+					password ENV.MAVEN_PUBLISH_CREDENTIALS.split(":")[1]
+				}
+				authentication {
+					basic(BasicAuthentication)
 				}
 			}
 		}
