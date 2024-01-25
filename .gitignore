@@ -10,6 +10,8 @@ namedSrc/
 mappings-active/
 mappings-active-copy/
 
+!/gradle/wrapper/gradle-wrapper.jar
+
 # idea
 .idea/
 *.iml
