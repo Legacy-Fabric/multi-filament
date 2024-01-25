@@ -1,0 +1,11 @@
+name: Build
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    container:
+      image: eclipse-temurin:20-jdk
+      options: --user root
+    steps:
+      - uses: actions/checkout@v3
+      - run: ./gradlew build --stacktrace --no-configuration-cache
