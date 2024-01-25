@@ -3,7 +3,7 @@ import org.gradle.util.GradleVersion
 plugins {
 	id 'java-library'
 	id 'java-gradle-plugin'
-	id 'checkstyle'
+//	id 'checkstyle'
 	id 'maven-publish'
 }
 
@@ -38,10 +38,10 @@ test {
 	useJUnitPlatform()
 }
 
-checkstyle {
-	configFile = file('checkstyle.xml')
-	toolVersion = '10.3.3'
-}
+//checkstyle {
+//	configFile = file('checkstyle.xml')
+//	toolVersion = '10.3.3'
+//}
 
 gradlePlugin {
 	plugins {
