@@ -1,0 +1,28 @@
+.gradle/
+*-merged.jar
+*-mapped.jar
+*-intermediary.jar
+*.DS_Store
+build/
+out/
+mappings_official/
+namedSrc/
+mappings-active/
+mappings-active-copy/
+
+# idea
+.idea/
+*.iml
+*.iws
+*.ipr
+*.jar
+
+# eclipse
+.eclipse
+.classpath
+.project
+.settings/
+
+# vscode
+.vscode/
+bin/
