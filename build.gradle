@@ -12,12 +12,6 @@ version = project.multi_filament_version
 
 def ENV = System.getenv()
 
-// Needed to read the main projects properties
-def properties = new Properties()
-file('../gradle.properties').newInputStream().withCloseable {
-	properties.load(it)
-}
-
 repositories {
 	maven {
 		name "Fabric Repository"
@@ -28,9 +22,9 @@ repositories {
 }
 
 dependencies {
-	implementation "org.ow2.asm:asm:${properties.asm_version}"
-	implementation "org.ow2.asm:asm-tree:${properties.asm_version}"
-	implementation "net.fabricmc.unpick:unpick-format-utils:${properties.unpick_version}"
+	implementation "org.ow2.asm:asm:${project.asm_version}"
+	implementation "org.ow2.asm:asm-tree:${project.asm_version}"
+	implementation "net.fabricmc.unpick:unpick-format-utils:${project.unpick_version}"
 	implementation "net.fabricmc:mapping-io:0.4.2"
 	implementation "net.fabricmc:fabric-filament:0.6.2"
 }
