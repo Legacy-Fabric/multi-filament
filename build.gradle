@@ -28,6 +28,7 @@ dependencies {
 	implementation "net.fabricmc:mapping-io:0.4.2"
 	implementation "net.fabricmc:fabric-filament:0.6.2"
 	implementation("net.fabricmc:fabric-loader:0.15.6")
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
 }
 
 tasks.withType(JavaCompile) {

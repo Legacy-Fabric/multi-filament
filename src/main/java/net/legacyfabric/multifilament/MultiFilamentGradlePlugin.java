@@ -1,5 +1,7 @@
 package net.legacyfabric.multifilament;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.fabricmc.filament.FilamentGradlePlugin;
 import net.fabricmc.filament.task.CombineUnpickDefinitionsTask;
 
@@ -10,6 +12,8 @@ import org.gradle.api.Project;
 import org.gradle.api.tasks.TaskContainer;
 
 public class MultiFilamentGradlePlugin implements Plugin<Project> {
+	public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
 	@Override
 	public void apply(Project project) {
 		project.getPlugins().apply(FilamentGradlePlugin.class);
