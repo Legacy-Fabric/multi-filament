@@ -51,10 +51,10 @@ public abstract class MultiFilamentExtension {
         DownloadTask downloadIntermediary = getProject().getTasks().create("downloadIntermediary", DownloadTask.class, downloadTask -> {
 //            downloadTask.setGroup(getBuildMappingGroup().get());
             downloadTask.getUrl().set(
-                    getMinecraftVersion().map(v -> getIntermediaryProvider().getIntermediaryURL(v))
+                    minecraftVersionGetter().map(v -> getIntermediaryProvider().getIntermediaryURL(v))
             );
             downloadTask.getOutput().set(getMinecraftCacheDirectory().flatMap(
-                    dir -> getMinecraftVersion().map(v -> dir.file(v + "-intermediary.tiny")))
+                    dir -> minecraftVersionGetter().map(v -> dir.file(v + "-intermediary.tiny")))
             );
         });
 
@@ -95,13 +95,13 @@ public abstract class MultiFilamentExtension {
         });
     }
 
-    public Property<String> getMinecraftVersion() {
+    private Property<String> minecraftVersionGetter() {
         return FilamentExtension.get(getProject()).getMinecraftVersion();
     }
 
     public IntermediaryProvider getIntermediaryProvider() {
         if (intermediaryProvider == null) {
-            intermediaryProvider = ProviderHandler.get(getMinecraftVersion().get(), getIntermediaryRevision().get());
+            intermediaryProvider = ProviderHandler.get(minecraftVersionGetter().get(), getIntermediaryRevision().get());
         }
 
         return intermediaryProvider;
@@ -123,6 +123,6 @@ public abstract class MultiFilamentExtension {
     }
 
     public boolean isServerBundled() {
-        return VersionHelper.isServerBundled(getMinecraftVersion().get());
+        return VersionHelper.isServerBundled(minecraftVersionGetter().get());
     }
 }
