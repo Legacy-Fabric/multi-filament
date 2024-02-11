@@ -81,9 +81,6 @@ public abstract class MultiFilamentExtension {
 
         UnifyMappingsTask unifyMappings = getProject().getTasks().create("unifyMappings", UnifyMappingsTask.class, task -> {
             task.dependsOn(versionifyMappingsExclude);
-
-            task.doFirst(a -> getTempDirectory().getAsFile().get().mkdir());
-
             task.getUnifiedDir().set(getTempMappingsDir());
             task.getVersionedDir().set(getActiveMappingsDir());
             task.getOutputDir().set(getMultiMappingsDir());

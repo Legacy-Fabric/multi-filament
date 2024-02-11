@@ -61,5 +61,6 @@ public abstract class DeduplicateMappingsTask extends MappingOutputTask {
 		});
 		this.getInputDir().getAsFile().get().delete();
 		Files.move(this.getOutputDir().getAsFile().get().toPath(), this.getInputDir().getAsFile().get().toPath());
+		this.getOutputDir().getAsFile().get().mkdirs();
 	}
 }
