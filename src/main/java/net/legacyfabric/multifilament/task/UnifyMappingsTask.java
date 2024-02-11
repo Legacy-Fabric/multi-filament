@@ -35,19 +35,19 @@ public abstract class UnifyMappingsTask extends MappingOutputTask {
 	}
 
 	@Input
-	public abstract Property<String> getUnifiedDir();
+	public abstract DirectoryProperty getUnifiedDir();
 
 	@InputDirectory
 	public abstract DirectoryProperty getVersionedDir();
 
 	void pre() throws IOException {
-		File file = new File(this.getVersionedDir().getAsFile().get().getParentFile(), this.getUnifiedDir().get());
+		File file = getUnifiedDir().getAsFile().get();
 		file.delete();
 		Files.move(this.getOutputDir().getAsFile().get().toPath(), file.toPath());
 	}
 
 	void run(MappingWriter var1) throws IOException {
-		File file = new File(this.getVersionedDir().getAsFile().get().getParentFile(), this.getUnifiedDir().get());
+		File file = getUnifiedDir().getAsFile().get();
 		MemoryMappingTree treeView = new MemoryMappingTree();
 		MappingReader.read(file.toPath(), treeView);
 		MemoryMappingTree mappingTree = new MemoryMappingTree();

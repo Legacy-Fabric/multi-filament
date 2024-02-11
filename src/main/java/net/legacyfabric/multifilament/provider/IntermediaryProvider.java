@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -18,6 +17,9 @@ import java.util.List;
 public interface IntermediaryProvider {
     String getIntermediaryURL(String mcVersion);
     boolean supportVersion(String mcVersion);
+    default boolean revisionMatch(int revision) {
+        return true;
+    }
 
     class FabricLikeMetadata {
         private final String url;
@@ -31,6 +33,7 @@ public interface IntermediaryProvider {
         private void computeData() {
             try {
                 URL url1 = new URL(url);
+
                 try (InputStream stream = url1.openStream()) {
                     try (Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
                         JsonArray array = gson.fromJson(reader, JsonArray.class);

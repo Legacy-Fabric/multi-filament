@@ -1,5 +1,6 @@
 package net.legacyfabric.multifilament;
 
+import net.fabricmc.filament.FilamentGradlePlugin;
 import net.fabricmc.filament.task.CombineUnpickDefinitionsTask;
 
 import net.legacyfabric.multifilament.task.FixedRemapUnpickDefinitionsTask;
@@ -11,6 +12,11 @@ import org.gradle.api.tasks.TaskContainer;
 public class MultiFilamentGradlePlugin implements Plugin<Project> {
 	@Override
 	public void apply(Project project) {
+		project.getPlugins().apply(FilamentGradlePlugin.class);
+
+		final MultiFilamentExtension extension = project.getExtensions().create("multiFilament", MultiFilamentExtension.class);
+		extension.createTasks();
+
 		TaskContainer tasks = project.getTasks();
 		CombineUnpickDefinitionsTask combineUnpickDefinitions = (CombineUnpickDefinitionsTask) tasks.getByName("combineUnpickDefinitions");
 		tasks.register("fixedRemapUnpickDefinitionsIntermediary", FixedRemapUnpickDefinitionsTask.class, (task) -> {
