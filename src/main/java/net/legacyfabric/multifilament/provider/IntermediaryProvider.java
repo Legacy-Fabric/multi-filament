@@ -5,6 +5,7 @@ import net.legacyfabric.multifilament.MultiFilamentGradlePlugin;
 import net.legacyfabric.multifilament.util.FabricMetaMCVersion;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public interface IntermediaryProvider {
         private void computeData() {
             try {
                 TypeReference<List<FabricMetaMCVersion>> metaType = new TypeReference<List<FabricMetaMCVersion>>() {};
-                List<FabricMetaMCVersion> versions = MultiFilamentGradlePlugin.OBJECT_MAPPER.readValue(url, metaType);
+                List<FabricMetaMCVersion> versions = MultiFilamentGradlePlugin.OBJECT_MAPPER.readValue(new URL(url), metaType);
 
                 if (versions != null) {
                     versions.forEach(v -> {
