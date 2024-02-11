@@ -34,7 +34,7 @@ public abstract class UnifyMappingsTask extends MappingOutputTask {
 		this.getOutputFormat().convention(MappingFormat.ENIGMA);
 	}
 
-	@Input
+	@InputDirectory
 	public abstract DirectoryProperty getUnifiedDir();
 
 	@InputDirectory
