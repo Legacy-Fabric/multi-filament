@@ -25,9 +25,9 @@ public class LegacyFabricProvider implements IntermediaryProvider {
     private String getIntermediaryFolder() {
         switch (revision) {
             case 1:
-                return "legacy/";
+                return "/legacy";
             case 0:
-                return "legacy_old/";
+                return "/legacy_old";
             default:
                 return "";
         }
