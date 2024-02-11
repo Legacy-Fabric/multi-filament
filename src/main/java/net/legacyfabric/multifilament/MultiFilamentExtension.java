@@ -49,14 +49,13 @@ public abstract class MultiFilamentExtension {
 
     protected void createTasks() {
         DownloadTask downloadIntermediary = getProject().getTasks().create("downloadIntermediary", DownloadTask.class, downloadTask -> {
-            downloadTask.setGroup(getBuildMappingGroup().get());
+//            downloadTask.setGroup(getBuildMappingGroup().get());
             downloadTask.getUrl().set(
-                    getIntermediaryProvider()
-                            .getIntermediaryURL(getMinecraftVersion().get())
+                    getMinecraftVersion().map(v -> getIntermediaryProvider().getIntermediaryURL(v))
             );
-            downloadTask.getOutput().set(getMinecraftCacheDirectory().get().file(
-                    getMinecraftVersion().get() + "-intermediary.tiny"
-            ));
+            downloadTask.getOutput().set(getMinecraftCacheDirectory().flatMap(
+                    dir -> getMinecraftVersion().map(v -> dir.file(v + "-intermediary.tiny")))
+            );
         });
 
         VersionifyFilterMappingsTask versionifyMappingsFilter = getProject().getTasks().create("versionifyMappingsFilter", VersionifyFilterMappingsTask.class, task -> {
