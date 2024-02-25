@@ -35,9 +35,11 @@ public abstract class MultiFilamentExtension {
     public abstract Property<String> getMapJarGroupGroup();
 
     private IntermediaryProvider intermediaryProvider;
+    private final Property<String> minecraftVersion;
 
     @Inject
     public MultiFilamentExtension() {
+        minecraftVersion = FilamentExtension.get(getProject()).getMinecraftVersion();
         getIntermediaryRevision().finalizeValueOnRead();
         getActiveMappingsDir().finalizeValueOnRead();
         getMultiMappingsDir().finalizeValueOnRead();
@@ -96,7 +98,7 @@ public abstract class MultiFilamentExtension {
     }
 
     private Property<String> minecraftVersionGetter() {
-        return FilamentExtension.get(getProject()).getMinecraftVersion();
+        return minecraftVersion;
     }
 
     public IntermediaryProvider getIntermediaryProvider() {
