@@ -21,7 +21,7 @@ import java.io.IOException;
 public abstract class VersionifyFilterMappingsTask extends MappingOutputTask {
 	@Inject
 	public VersionifyFilterMappingsTask() {
-		this.getOutputFormat().convention(MappingFormat.ENIGMA);
+		this.getOutputFormat().convention(MappingFormat.ENIGMA_DIR);
 	}
 
 	@InputFile

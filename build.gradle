@@ -25,8 +25,8 @@ dependencies {
 	implementation "org.ow2.asm:asm:${project.asm_version}"
 	implementation "org.ow2.asm:asm-tree:${project.asm_version}"
 	implementation "net.fabricmc.unpick:unpick-format-utils:${project.unpick_version}"
-	implementation "net.fabricmc:mapping-io:0.4.2"
-	implementation "net.fabricmc:fabric-filament:0.6.2"
+	implementation "net.fabricmc:mapping-io:0.5.1"
+	implementation "net.fabricmc:fabric-filament:0.7.1"
 	implementation("net.fabricmc:fabric-loader:0.15.6")
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
 }

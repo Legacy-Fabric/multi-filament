@@ -5,6 +5,7 @@ import net.fabricmc.mappingio.MappingFlag;
 import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.tree.MappingTree;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
@@ -96,8 +97,8 @@ public class FilteringMappingVisitor implements MappingVisitor {
 	}
 
 	@Override
-	public boolean visitMethodVar(int lvtRowIndex, int lvIndex, int startOpIdx, String srcName) throws IOException {
-		return parent.visitMethodVar(lvtRowIndex, lvIndex, startOpIdx, srcName);
+	public boolean visitMethodVar(int lvtRowIndex, int lvIndex, int startOpIdx, int endOpIdx, @Nullable String srcName) throws IOException {
+		return parent.visitMethodVar(lvtRowIndex, lvIndex, startOpIdx, endOpIdx, srcName);
 	}
 
 	@Override

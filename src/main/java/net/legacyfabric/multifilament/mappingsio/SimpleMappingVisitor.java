@@ -3,6 +3,7 @@ package net.legacyfabric.multifilament.mappingsio;
 import net.fabricmc.mappingio.MappedElementKind;
 import net.fabricmc.mappingio.MappingFlag;
 import net.fabricmc.mappingio.MappingVisitor;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
@@ -65,8 +66,8 @@ public class SimpleMappingVisitor implements MappingVisitor {
 	}
 
 	@Override
-	public boolean visitMethodVar(int lvtRowIndex, int lvIndex, int startOpIdx, String srcName) throws IOException {
-		return parent.visitMethodVar(lvtRowIndex, lvIndex, startOpIdx, srcName);
+	public boolean visitMethodVar(int lvtRowIndex, int lvIndex, int startOpIdx, int endOpIdx, @Nullable String srcName) throws IOException {
+		return parent.visitMethodVar(lvtRowIndex, lvIndex, startOpIdx, endOpIdx, srcName);
 	}
 
 	@Override

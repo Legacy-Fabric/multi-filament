@@ -31,7 +31,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 public abstract class UnifyMappingsTask extends MappingOutputTask {
 	@Inject
 	public UnifyMappingsTask() {
-		this.getOutputFormat().convention(MappingFormat.ENIGMA);
+		this.getOutputFormat().convention(MappingFormat.ENIGMA_DIR);
 	}
 
 	@InputDirectory

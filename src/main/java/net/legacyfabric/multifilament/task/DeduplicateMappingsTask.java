@@ -26,7 +26,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 public abstract class DeduplicateMappingsTask extends MappingOutputTask {
 	@Inject
 	public DeduplicateMappingsTask() {
-		this.getOutputFormat().convention(MappingFormat.ENIGMA);
+		this.getOutputFormat().convention(MappingFormat.ENIGMA_DIR);
 	}
 
 	@InputDirectory

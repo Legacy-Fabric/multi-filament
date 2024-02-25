@@ -25,7 +25,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 public abstract class VersionifyExcludeMappingsTask extends MappingOutputTask {
 	@Inject
 	public VersionifyExcludeMappingsTask() {
-		this.getOutputFormat().convention(MappingFormat.ENIGMA);
+		this.getOutputFormat().convention(MappingFormat.ENIGMA_DIR);
 	}
 
 	@InputFile
