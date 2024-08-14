@@ -26,6 +26,8 @@ dependencies {
 	implementation "org.ow2.asm:asm-tree:${project.asm_version}"
 	implementation "net.fabricmc.unpick:unpick-format-utils:${project.unpick_version}"
 	implementation "net.fabricmc:mapping-io:0.5.1"
+	implementation "cuchaz:enigma-cli:${project.enigma_version}"
+	implementation "net.fabricmc:name-proposal:${project.name_proposal_version}"
 	implementation "net.fabricmc:fabric-filament:0.7.1"
 	implementation("net.fabricmc:fabric-loader:0.15.6")
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
