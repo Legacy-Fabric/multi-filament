@@ -1,11 +1,9 @@
 package net.legacyfabric.multifilament;
 
-import cuchaz.enigma.command.CheckMappingsCommand;
 import net.fabricmc.filament.FilamentExtension;
 import net.fabricmc.filament.task.CombineUnpickDefinitionsTask;
 import net.fabricmc.filament.task.DownloadTask;
 import net.fabricmc.filament.task.MapJarTask;
-import net.fabricmc.filament.task.UnpickJarTask;
 import net.fabricmc.filament.task.enigma.MapSpecializedMethodsTask;
 import net.fabricmc.filament.task.mappingio.CompleteMappingsTask;
 import net.fabricmc.filament.task.mappingio.ConvertMappingsTask;
@@ -13,14 +11,12 @@ import net.fabricmc.filament.task.mappingio.MergeMappingsTask;
 import net.fabricmc.filament.task.minecraft.ExtractBundledServerTask;
 import net.fabricmc.filament.task.minecraft.MergeMinecraftTask;
 import net.fabricmc.mappingio.format.MappingFormat;
-import net.fabricmc.nameproposal.MappingNameCompleter;
 import net.legacyfabric.multifilament.provider.IntermediaryProvider;
 import net.legacyfabric.multifilament.provider.ProviderHandler;
 import net.legacyfabric.multifilament.task.*;
 import net.legacyfabric.multifilament.util.VersionHelper;
 import org.gradle.api.Action;
 import org.gradle.api.Project;
-import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.DirectoryProperty;
@@ -71,6 +67,10 @@ public abstract class MultiFilamentExtension {
     @Inject
     protected abstract Project getProject();
 
+    public abstract DirectoryProperty getTempDirectory();
+    public abstract DirectoryProperty getLibsDirectory();
+    public abstract DirectoryProperty getCacheDirectory();
+
     public abstract Property<Integer> getIntermediaryRevision();
     public abstract DirectoryProperty getActiveMappingsDir();
     public abstract DirectoryProperty getMultiMappingsDir();
@@ -97,11 +97,14 @@ public abstract class MultiFilamentExtension {
 
     @Inject
     public MultiFilamentExtension() {
+        getTempDirectory().set(getProject().getObjects().directoryProperty().fileValue(new File(getProject().getRootDir(), "build/temp/yarn")));
+        getLibsDirectory().set(getProject().getObjects().directoryProperty().fileValue(new File(getProject().getRootDir(), "build/libs")));
+        getCacheDirectory().set(getProject().getObjects().directoryProperty().fileValue(new File(getProject().getRootDir(), ".gradle/multi-filament")));
+
         minecraftVersion = FilamentExtension.get(getProject()).getMinecraftVersion();
         getIntermediaryRevision().finalizeValueOnRead();
         getActiveMappingsDir().finalizeValueOnRead();
         getMultiMappingsDir().finalizeValueOnRead();
-        getTempDirectory().finalizeValueOnRead();
         getYarnGroup().finalizeValueOnRead();
         getBuildMappingGroup().finalizeValueOnRead();
         getMapJarGroupGroup().finalizeValueOnRead();
@@ -449,23 +452,8 @@ public abstract class MultiFilamentExtension {
         return intermediaryProvider;
     }
 
-    public DirectoryProperty getTempDirectory() {
-//        return getProject().getObjects().directoryProperty().fileValue(new File(getProject().getRootDir(), ".gradle/multi-filament"));
-        return getProject().getObjects().directoryProperty().fileValue(new File(getProject().getRootDir(), "build/temp/yarn"));
-    }
-
     public Provider<Directory> getMinecraftCacheDirectory() {
-//        return getCacheDirectory().dir("minecraft");
         return getTempDirectory().dir("minecraft");
-    }
-
-    public DirectoryProperty getLibsDirectory() {
-//        return getCacheDirectory().dir("libs");
-        return getProject().getObjects().directoryProperty().fileValue(new File(getProject().getRootDir(), "build/libs"));
-    }
-
-    public DirectoryProperty getCacheDirectory() {
-        return getProject().getObjects().directoryProperty().fileValue(new File(getProject().getRootDir(), ".gradle/multi-filament"));
     }
 
     public Provider<Directory> getIntermediaryRevisionDirectory() {

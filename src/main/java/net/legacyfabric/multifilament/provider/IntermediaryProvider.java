@@ -26,7 +26,7 @@ public interface IntermediaryProvider {
 
         private void computeData() {
             try {
-                TypeReference<List<FabricMetaMCVersion>> metaType = new TypeReference<List<FabricMetaMCVersion>>() {};
+                TypeReference<List<FabricMetaMCVersion>> metaType = new TypeReference<>() {};
                 List<FabricMetaMCVersion> versions = MultiFilamentGradlePlugin.OBJECT_MAPPER.readValue(new URL(url), metaType);
 
                 if (versions != null) {
